@@ -1,10 +1,10 @@
-import {  MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import React, { useState, useEffect } from "react";
-import { Modal, Form, Input, Alert } from 'antd';
+import { Modal, Form, Input, Alert, Table, Space, Button } from 'antd';
 import {
     UserOutlined,
 } from "@ant-design/icons";
 import AdminService from '../services/admin.service';
+
 export default function UserDetails() {
 
     const [data, setData] = useState([]);
@@ -25,6 +25,7 @@ export default function UserDetails() {
 
     const [err, setErr] = useState(false);
     const [errInfo, setErrInfo] = useState("");
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormValues({ ...formValues, [name]: value });
@@ -67,7 +68,7 @@ export default function UserDetails() {
                         error.response.data.message) ||
                     error.message ||
                     error.toString();
-                    setErrInfo(_content)
+                setErrInfo(_content)
             });
         setModalText('Loadging...');
         setConfirmLoading(true);
@@ -114,74 +115,66 @@ export default function UserDetails() {
                         error.response.data.message) ||
                     error.message ||
                     error.toString();
-                    setErrInfo(_content)
+                setErrInfo(_content)
             }
         );
     }, []);
 
+    const columns = [
+        {
+            title: 'Full name',
+            dataIndex: 'fullName',
+            key: 'fullName',
+            sorter: (a, b) => a.fullName.localeCompare(b.fullName),
+            defaultSortOrder: 'descend', // set default sort order to descending
+            render: (text, record) => (
+                <Space size="middle">
+                    <UserOutlined />
+                    <p className='fw-bold mb-1'>{text}</p>
+                </Space>
+            ),
+        },
+        {
+            title: 'User name',
+            dataIndex: 'username',
+            key: 'username',
+            sorter: (a, b) => a.username.localeCompare(b.username),
+            defaultSortOrder: 'descend', // set default sort order to descending
+            render: text => <p className='fw-normal mb-1'>{text}</p>,
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+            render: text => <p className='fw-normal mb-1'>{text}</p>,
+        },
+        {
+            title: 'Phone',
+            dataIndex: 'phone',
+            key: 'phone',
+            render: text => <p className='fw-normal mb-1'>{text}</p>,
+        },
+        {
+            title: 'Role',
+            dataIndex: 'roles',
+            key: 'roles',
+            render: roles => <p className='fw-normal mb-1'>{roles.join(", ")}</p>,
+        },
+        {
+            title: 'Actions',
+            key: 'actions',
+            render: (text, record) => (
+                <Space size="middle">
+                    <Button type="primary" onClick={() => handleEditClick(record.id)}>Edit</Button>
+                    <Button type="primary" danger onClick={() => handleDeleteClick(record.id)}>Delete</Button>
+                </Space>
+            ),
+        },
+    ];
+
     return (
         <>
-            <MDBTable align='middle'>
-                <MDBTableHead>
-                    <tr>
-                        <th scope='col'>Full name</th>
-                        <th scope='col'>User name</th>
-                        <th scope='col'>Email</th>
-                        <th scope='col'>Phone</th>
-                        <th scope='col'>Role</th>
-                        <th scope='col'>Actions</th>
-                    </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                    {data.map(row => (
-                        <tr key={row.id}>
-                            <td>
-                                <div className='d-flex align-items-center'>
-                                    <UserOutlined />
-                                    <div className='ms-3'>
-                                        <p className='fw-bold mb-1'>{row.fullName}</p>
-
-                                    </div>
-                                </div>
-                            </td>
-
-
-                            <td>
-                                <p className='fw-normal mb-1'>{row.username}</p>
-                            </td>
-                            <td>
-                                <p className='fw-normal mb-1'>{row.email}</p>
-                            </td>
-
-                            <td>
-                                <p className='fw-normal mb-1'>{row.phone}</p>
-                            </td>
-
-                            <td>
-                                <p className='fw-normal mb-1'>{row.roles.join(", ")}</p>
-
-                            </td>
-                            <td className='actions-cell'>
-                                <MDBBtn
-                                    color='info'
-                                    style={{ boxShadow: "none" }}
-                                    onClick={() => handleEditClick(row.id)}
-                                >
-                                    Edit
-                                </MDBBtn>
-                                <MDBBtn
-                                    className='me-1'
-                                    color='danger'
-                                    style={{ boxShadow: "none" }}
-                                    onClick={() => handleDeleteClick(row.id)}
-                                >
-                                    Delete
-                                </MDBBtn>
-                            </td>
-                        </tr>
-                    ))}
-                </MDBTableBody>
-            </MDBTable>
+            <Table columns={columns} dataSource={data} />
 
             <Modal
                 title="Delete User"
@@ -210,56 +203,40 @@ export default function UserDetails() {
 
                 >
 
-                    UserName:
-                    <Input
-                        defaultValue={dataOfEditUser.username}
+                    <Form.Item
+                        label="UserName"
                         name="userName"
-                        type="text"
-                        //value={formValues.username}
-                        onChange={handleInputChange}
                         rules={[{ required: true, message: 'Please input your UserName!' }]}
-                    />
+                    >
+                        <Input defaultValue={dataOfEditUser.username} name="userName" type="text" onChange={handleInputChange} />
+                    </Form.Item>
 
-                    FullName:
-                    <Input
-                        defaultValue={dataOfEditUser.fullName}
+                    <Form.Item
+                        label="FullName"
                         name="fullName"
-                        type="text"
-                        // value={formValues.fullName}
-                        onChange={handleInputChange}
                         rules={[{ required: true, message: 'Please input your FullName!' }]}
-                    />
-                    Email:
-                    <Input
-                        defaultValue={dataOfEditUser.email}
+                    >
+                        <Input defaultValue={dataOfEditUser.fullName} name="fullName" type="text" onChange={handleInputChange} />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Email"
                         name="email"
-                        type="email"
-                        //value={formValues.email}
-                        onChange={handleInputChange}
                         rules={[{ required: true, message: 'Please input your Email!' }]}
-                    />
-                    Phone
-                    <Input
-                        defaultValue={dataOfEditUser.phone}
+                    >
+                        <Input defaultValue={dataOfEditUser.email} name="email" type="email" onChange={handleInputChange} />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Phone"
                         name="phone"
-                        type="tel"
-                        //value={formValues.phone}
-                        onChange={handleInputChange}
                         rules={[{ required: true, message: 'Please input your Phone!' }]}
-                    />
+                    >
+                        <Input defaultValue={dataOfEditUser.phone} name="phone" type="tel" onChange={handleInputChange} />
+                    </Form.Item>
                 </Form>
-                {err &&
-                    <Alert
-                        message="Error"
-                        description={errInfo}
-                        type="error"
-                        showIcon={true}
-                    />
-                }
+                {err && <Alert message={errInfo} type="error" />}
             </Modal>
         </>
-
-
-
     );
 }

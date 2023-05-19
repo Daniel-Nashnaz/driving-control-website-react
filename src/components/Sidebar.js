@@ -58,11 +58,11 @@ function Sidebar() {
           <CarOutlined />
           <span>Travels</span>
         </Menu.Item>
-        <SubMenu key="0" title={<span><ApiOutlined /><span>Action</span></span>}>
+        <SubMenu key="1" title={<span><ApiOutlined /><span>Action</span></span>}>
           <Menu.Item key="/addVeicle">All Veicles</Menu.Item>
           <Menu.Item key="/addDriverToVehicle">Add Driver To Tehicle</Menu.Item>
         </SubMenu>
-        <SubMenu key="0" title={<span><SettingOutlined /><span>Setting</span></span>}>
+        <SubMenu key="2" title={<span><SettingOutlined /><span>Setting</span></span>}>
           <Menu.Item key="0" onClick={changeTheme}>Change Style</Menu.Item>
           <Menu.Item key="/addDriverToVehicle">Add </Menu.Item>
         </SubMenu>

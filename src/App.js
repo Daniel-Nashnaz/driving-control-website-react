@@ -14,6 +14,7 @@ import AddDriverToVehicle from './pages/AddDriverToVehicle';
 import NotFound from './pages/NotFound ';
 import TableOfVehicles from './pages/TableOfVehicles';
 import UserDetails from './pages/UserDetails';
+import Apps from './test';
 
 function App() {
 
@@ -78,7 +79,7 @@ function App() {
 
                   {/* <Route path="/addVeicle" element={<TableOfVehicles />}></Route> */}
                   {/* <Route path="/addDriverToVehicle" element={<AddDriverToVehicle/>}></Route> */}
-                  {/* <Route path="/profile" element={<Profile />}></Route>   */}
+                  <Route path="/profile" element={<Apps />}></Route>  
 
                 </Routes>
               </Content>

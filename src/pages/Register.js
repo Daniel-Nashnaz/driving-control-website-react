@@ -47,7 +47,7 @@ const Register = (props) => {
         }
       );
     } else if (myprops === "User") {
-      AdminServices.getAdminAddDriver(registerData).then(
+      AdminServices.adminAddDriver(registerData).then(
         (response) => {
           setMessage(response.status + " Status User add successfully!");
           setSuccessful(true);
