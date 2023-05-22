@@ -1,15 +1,14 @@
+import { Result } from 'antd';
 import React from 'react';
 import { Link } from "react-router-dom";
 
 
-const NotFound = () => {
-    return (
-        <div>
-            <h1>Oops! You seem to be lost.</h1>
-            <p>Here are some helpful links:</p>
-            <Link to='/home'>Home</Link>
-        </div>
-    )
-}
-
+const NotFound = () =>(
+    <Result
+      status="404"
+      title="404"
+      subTitle="Sorry, the page you visited does not exist."
+      extra={<Link to='/'>Back Home</Link>}
+    />
+  );
 export default NotFound;

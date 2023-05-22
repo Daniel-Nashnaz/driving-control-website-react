@@ -1,36 +1,58 @@
-import { Avatar, Button, List, Skeleton } from 'antd';
+import { Avatar, List, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import TravelService from '../services/travel.service';
 
-const count = 10;
+
+const formatTime = (time) => {
+    return moment(time).format("YYYY-MM-DD, h:mm:ss a");
+}
+const getRandomAvatar = () => {
+    const randomNumber = Math.floor(Math.random() * 10) + 1;
+    return `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${randomNumber}`;
+};
+
+
 const LastTravelOfUsers = () => {
     const [initLoading, setInitLoading] = useState(true);
-    const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
-    const [list, setList] = useState([]);
+
+
     useEffect(() => {
-        fetch(fakeDataUrl)
-            .then((res) => res.json())
-            .then((res) => {
-                setInitLoading(false);
-                setData(res.results);
-                setList(res.results);
-            });
+        fetchData();
     }, []);
+
+    const fetchData = async () => {
+        const response = await TravelService.getAllLastTravelOfUsers();
+        setData(response);
+        setInitLoading(false);
+    };
+
     return (
         <List
+            header={<div style={{ textAlign:'center' }}>
+                <i><h4 style={{color:'gold'}}>Last Travels </h4></i>
+                </div>}
             className="demo-loadmore-list"
+            style={{ minHeight: '350px' }}
             loading={initLoading}
             itemLayout="horizontal"
-            dataSource={list}
+            dataSource={data}
             renderItem={(item) => (
                 <List.Item
-                    actions={[<a key="list-loadmore-more">more</a>]}
+                actions={[
+                    <Link to={`/user/${item.id}/${item.fullName}`} key="list-loadmore-more">
+                        More Details
+                    </Link>
+                ]}
                 >
                     <Skeleton avatar title={"Last Travels"} loading={item.loading} active>
                         <List.Item.Meta
-                            avatar={<Avatar src={item.picture.large} />}
-                            title={<a href="https://ant.design">{item.name?.last}</a>}
-                            description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                            avatar={<Avatar src={getRandomAvatar()} />}
+                            title={item.fullName}
+                            description={`Time Start: ${formatTime(item.timeStart)}, Username: ${item.userName}, Email: ${item.email}, 
+                            Phone: ${item.phone}`}
                         />
                     </Skeleton>
                 </List.Item>
@@ -38,4 +60,5 @@ const LastTravelOfUsers = () => {
         />
     );
 };
+
 export default LastTravelOfUsers;

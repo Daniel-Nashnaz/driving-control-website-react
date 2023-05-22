@@ -1,16 +1,49 @@
-import { Select, Space, Switch, Checkbox, Divider, Button, Typography, message, Form } from 'antd';
+import { Select,  Switch, Checkbox, Divider, Button, Typography, message, Form } from 'antd';
 import React, { useContext, useEffect, useState } from 'react';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import AdminService from './services/admin.service';
-import AuthContext from './common/AuthContext';
-
+import AuthContext from "../common/AuthContext";
+import AdminService from '../services/admin.service';
+import {  Table } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['ExceededSpeedLimit', 'ForwardDirections', 'LaneDeparture', 'PedestrianAndCyclistCollision', 'SuddenBraking'];
 const defaultCheckedList = ['ExceededSpeedLimit', 'SuddenBraking'];
 
 const { Title, Paragraph } = Typography;
-
-const Apps = () => {
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+  },
+];
+const data = [
+  {
+    key: '1',
+    name: 'John Brown',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+  },
+  {
+    key: '2',
+    name: 'Jim Green',
+    age: 42,
+    address: 'London No. 1 Lake Park',
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sydney No. 1 Lake Park',
+  },
+];
+const SettigAlerts = () => {
     const [checkedList, setCheckedList] = useState(defaultCheckedList);
     const [indeterminate, setIndeterminate] = useState(true);
     const [checkAll, setCheckAll] = useState(false);
@@ -148,17 +181,23 @@ const Apps = () => {
                 <ul>
                     <li>
                         <Paragraph>
-                            Select an option from the dropdown
+                            Select the dropdown menu option: low, medium, high, none
                         </Paragraph>
                     </li>
                     <li>
                         <Paragraph>
-                            Toggle the switch to enable/disable something
+                            Toggle the switch to enable/disable summary reports
                         </Paragraph>
                     </li>
                     <li>
                         <Paragraph>
-                            Check/uncheck the checkboxes to select/deselect something
+                        <Table 
+                        pagination={false}
+                        bordered={true}
+                        style={{width:400}}
+                        columns={columns} 
+                        dataSource={data} 
+                        size="small" />
                         </Paragraph>
                     </li>
                 </ul>
@@ -202,6 +241,7 @@ const Apps = () => {
                     style={{ width: 125, marginLeft: 15 }}
                     allowClear
                     options={[
+                        { value: 0, label: 'No' },
                         { value: 1, label: 'Low' },
                         { value: 2, label: 'Medium' },
                         { value: 3, label: 'High' },
@@ -223,7 +263,7 @@ const Apps = () => {
                 <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
                 <div style={{ marginTop: '8px' }}>
                     <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-                    <Title level={2}>Check all</Title>
+                        <Title level={2}>Check all</Title>
                     </Checkbox>
                 </div>
             </div>
@@ -242,4 +282,4 @@ const Apps = () => {
     );
 };
 
-export default Apps;
+export default SettigAlerts;

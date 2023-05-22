@@ -55,6 +55,7 @@ function AddDriverToVehicle() {
                         error.response.data.message) ||
                     error.message ||
                     error.toString();
+                message.error(resMessage);
                 states = false;
             }
 

@@ -64,7 +64,7 @@ function Sidebar() {
         </SubMenu>
         <SubMenu key="2" title={<span><SettingOutlined /><span>Setting</span></span>}>
           <Menu.Item key="0" onClick={changeTheme}>Change Style</Menu.Item>
-          <Menu.Item key="/addDriverToVehicle">Add </Menu.Item>
+          <Menu.Item key="/settingAlerts">Setting Alerts</Menu.Item>
         </SubMenu>
         <Menu.Item key="/profile">
           <UserOutlined />

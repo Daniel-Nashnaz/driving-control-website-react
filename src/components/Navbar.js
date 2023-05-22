@@ -32,7 +32,7 @@ function Navbar() {
                 onClick={handleMenuClick}
                 style={{ backgroundColor: "transparent", borderBottom: "none" }}
             >
-                <Menu.Item key="/home">
+                <Menu.Item key="/">
                     <BranchesOutlined />
                     Driving control
                 </Menu.Item>

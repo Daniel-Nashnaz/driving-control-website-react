@@ -174,7 +174,10 @@ export default function UserDetails() {
 
     return (
         <>
-            <Table columns={columns} dataSource={data} />
+            <Table 
+            columns={columns} 
+            bordered={true}
+            dataSource={data} />
 
             <Modal
                 title="Delete User"

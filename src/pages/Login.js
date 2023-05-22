@@ -1,6 +1,6 @@
 import React, { useState,  useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Input, Button, Card, Space } from "antd";
+import { Form, Input, Button, Card } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import AuthContext from "../common/AuthContext"
 import logo from "../../src/images/Logo-drivind-control.png"; 
@@ -18,7 +18,7 @@ const Login = () => {
 
     try {
       await login(values.username, values.password);
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       // handle errors
       if (error.response) {

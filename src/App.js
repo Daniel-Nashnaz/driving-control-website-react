@@ -14,7 +14,13 @@ import AddDriverToVehicle from './pages/AddDriverToVehicle';
 import NotFound from './pages/NotFound ';
 import TableOfVehicles from './pages/TableOfVehicles';
 import UserDetails from './pages/UserDetails';
-import Apps from './test';
+import SettigAlerts from './pages/SettingAlerts';
+import LastTravelOfUsers from './pages/LastTravelOfUsers';
+import UserDetailsOfTravels from './pages/InfoOfTravelsAboutUsers';
+import StatisticsOfTrip from './pages/StatisticsOfTrip';
+import UserProfile from './pages/Profile';
+import AllInfromationAboutTrip from './pages/AllInformationAboutTrip';
+import Map from './pages/Map';
 
 function App() {
 
@@ -41,31 +47,23 @@ function App() {
                 }}
               >
                 <Routes>
-                  <Route path="/" element={<div>This is home page</div>}></Route>
                   <Route
                     path="/"
                     element={
-                      <ProtectedRoute accessBy="non-authenticated">
-                        <Login />
-                      </ProtectedRoute>
-                    }
-                  ></Route>
-                  <Route
-                    path="/home"
-                    element={
                       <ProtectedRoute accessBy="authenticated">
-                        <div>this is safe page</div>
+                        <Map/>
                       </ProtectedRoute>
                     }
                   ></Route>
-                  {/* <Route exact path="/" element={<p>Home</p>} /> */}
-                  {/* <Route path="/messages" element={<p>message</p>} /> */}
+                   <Route exact path="/travel" element={<LastTravelOfUsers/>} />
+                   <Route exact path="/user/:id/:fullName" element={<UserDetailsOfTravels/>} />
+                   <Route exact path="/tripsummary/:tripId"  element={<StatisticsOfTrip/>}/>
+                   <Route exact path="/allInfromation/:tripId" element={<AllInfromationAboutTrip/>} />
                   {/* <Route path="/settings" element={<p>setting</p>} /> */}
                   {/* <Route path="/travel" element={<div>Add Travel</div>}></Route> */}
                   <Route path="/addDriverToVehicle" element={<AddDriverToVehicle />} />
-                  <Route path="/addVeicle" element={<TableOfVehicles/>}></Route>
+                  <Route path="/addVeicle" element={<TableOfVehicles />}></Route>
                   <Route exact path="/userDetails" element={<UserDetails />} />
-                  <Route path='*' element={<NotFound />}/>
                   <Route
                     exact path="/addDriver"
                     element={
@@ -74,13 +72,21 @@ function App() {
                       </ProtectedRoute>
                     }
                   ></Route>
-
+                  <Route
+                    exact path="/settingAlerts"
+                    element={
+                      <ProtectedRoute accessBy="authenticated">
+                        <SettigAlerts />
+                      </ProtectedRoute>
+                    }
+                  ></Route>
 
 
                   {/* <Route path="/addVeicle" element={<TableOfVehicles />}></Route> */}
                   {/* <Route path="/addDriverToVehicle" element={<AddDriverToVehicle/>}></Route> */}
-                  <Route path="/profile" element={<Apps />}></Route>  
+                  <Route path="/profile" element={<UserProfile/>}></Route>
 
+                  <Route path='*' element={<NotFound />} />
                 </Routes>
               </Content>
             </Layout>
@@ -89,7 +95,7 @@ function App() {
         (
           <Routes>
             <Route
-              path="/"
+              path="/home"
               element={
                 <ProtectedRoute accessBy="non-authenticated">
                   <MainPage />
@@ -112,7 +118,7 @@ function App() {
                 </ProtectedRoute>
               }
             ></Route>
-            <Route path='*' element={<NotFound />}/>
+            <Route path='*' element={<NotFound />} />
           </Routes>
         )}
     </>
