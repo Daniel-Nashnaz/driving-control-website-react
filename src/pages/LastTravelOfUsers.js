@@ -1,13 +1,11 @@
 import { Avatar, List, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+import {formatTimeWithAM_PM} from '../common/formtar'
 import TravelService from '../services/travel.service';
 
 
-const formatTime = (time) => {
-    return moment(time).format("YYYY-MM-DD, h:mm:ss a");
-}
+
 const getRandomAvatar = () => {
     const randomNumber = Math.floor(Math.random() * 10) + 1;
     return `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${randomNumber}`;
@@ -51,7 +49,7 @@ const LastTravelOfUsers = () => {
                         <List.Item.Meta
                             avatar={<Avatar src={getRandomAvatar()} />}
                             title={item.fullName}
-                            description={`Time Start: ${formatTime(item.timeStart)}, Username: ${item.userName}, Email: ${item.email}, 
+                            description={`Time Start: ${formatTimeWithAM_PM(item.timeStart)}, Username: ${item.userName}, Email: ${item.email}, 
                             Phone: ${item.phone}`}
                         />
                     </Skeleton>

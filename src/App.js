@@ -20,7 +20,8 @@ import UserDetailsOfTravels from './pages/InfoOfTravelsAboutUsers';
 import StatisticsOfTrip from './pages/StatisticsOfTrip';
 import UserProfile from './pages/Profile';
 import AllInfromationAboutTrip from './pages/AllInformationAboutTrip';
-import Map from './pages/Map';
+import MessageList from './components/ShowAllMessage';
+import Dashboard from './pages/text';
 
 function App() {
 
@@ -51,14 +52,14 @@ function App() {
                     path="/"
                     element={
                       <ProtectedRoute accessBy="authenticated">
-                        <Map/>
+                        <LastTravelOfUsers />
                       </ProtectedRoute>
                     }
                   ></Route>
-                   <Route exact path="/travel" element={<LastTravelOfUsers/>} />
-                   <Route exact path="/user/:id/:fullName" element={<UserDetailsOfTravels/>} />
-                   <Route exact path="/tripsummary/:tripId"  element={<StatisticsOfTrip/>}/>
-                   <Route exact path="/allInfromation/:tripId" element={<AllInfromationAboutTrip/>} />
+                  <Route exact path="/travels" element={<Dashboard/>} />
+                  <Route exact path="/user/:id/:fullName" element={<UserDetailsOfTravels />} />
+                  <Route exact path="/tripsummary/:tripId" element={<StatisticsOfTrip />} />
+                  <Route exact path="/allInfromation/:tripId" element={<AllInfromationAboutTrip />} />
                   {/* <Route path="/settings" element={<p>setting</p>} /> */}
                   {/* <Route path="/travel" element={<div>Add Travel</div>}></Route> */}
                   <Route path="/addDriverToVehicle" element={<AddDriverToVehicle />} />
@@ -82,9 +83,9 @@ function App() {
                   ></Route>
 
 
-                  {/* <Route path="/addVeicle" element={<TableOfVehicles />}></Route> */}
+                  <Route path="/allmessagesSend" element={<MessageList />}></Route> 
                   {/* <Route path="/addDriverToVehicle" element={<AddDriverToVehicle/>}></Route> */}
-                  <Route path="/profile" element={<UserProfile/>}></Route>
+                  <Route path="/profile" element={<UserProfile />}></Route>
 
                   <Route path='*' element={<NotFound />} />
                 </Routes>

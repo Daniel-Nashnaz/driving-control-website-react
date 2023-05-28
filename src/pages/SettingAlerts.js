@@ -1,47 +1,54 @@
-import { Select,  Switch, Checkbox, Divider, Button, Typography, message, Form } from 'antd';
+import { Select, Switch, Checkbox, Divider, Button, Typography, message, Form } from 'antd';
 import React, { useContext, useEffect, useState } from 'react';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import AuthContext from "../common/AuthContext";
 import AdminService from '../services/admin.service';
-import {  Table } from 'antd';
+import { Table } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['ExceededSpeedLimit', 'ForwardDirections', 'LaneDeparture', 'PedestrianAndCyclistCollision', 'SuddenBraking'];
 const defaultCheckedList = ['ExceededSpeedLimit', 'SuddenBraking'];
 
 const { Title, Paragraph } = Typography;
 const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-  },
+    {
+        title: 'Count \\ Level',
+        dataIndex: 'info',
+    },
+    {
+        title: 'Low',
+        dataIndex: 'low',
+    },
+    {
+        title: 'Medium',
+        dataIndex: 'medium',
+    },
+    {
+        title: 'High',
+        dataIndex: 'high',
+    },
 ];
 const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-  },
+    {
+        key: '1',
+        info: 'Sudden braking:',
+        low: 6,
+        medium: 4,
+        high: 2,
+    },
+    {
+        key: '2',
+        info: 'Collisions:',
+        low: 8,
+        medium: 6,
+        high: 4,
+    },
+    {
+        key: '3',
+        info: 'Speed or lane:',
+        low: 10,
+        medium: 8,
+        high: 6,
+    },
 ];
 const SettigAlerts = () => {
     const [checkedList, setCheckedList] = useState(defaultCheckedList);
@@ -176,8 +183,9 @@ const SettigAlerts = () => {
         <>
             <div>
                 <Paragraph>
-                    Here's some information about what you can do:
+                    <Title level={3} style={{ color: 'blueviolet' }}>Here's some information about what you can do:</Title>
                 </Paragraph>
+                <h3>
                 <ul>
                     <li>
                         <Paragraph>
@@ -189,48 +197,52 @@ const SettigAlerts = () => {
                             Toggle the switch to enable/disable summary reports
                         </Paragraph>
                     </li>
-                    <li>
-                        <Paragraph>
-                        <Table 
+                </ul>
+                </h3>
+                <Paragraph>
+                    <Title level={3}>Table of setting of alert </Title>
+                    <Table
                         pagination={false}
                         bordered={true}
-                        style={{width:400}}
-                        columns={columns} 
-                        dataSource={data} 
+                        style={{ width: 400 }}
+                        columns={columns}
+                        dataSource={data}
                         size="small" />
-                        </Paragraph>
-                    </li>
-                </ul>
-                <Paragraph>
-                    Here's an explanation of each option:
                 </Paragraph>
-                <ul>
-                    <li>
-                        <Paragraph>
-                            ExceededSpeedLimit: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </Paragraph>
-                    </li>
-                    <li>
-                        <Paragraph>
-                            ForwardDirections: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </Paragraph>
-                    </li>
-                    <li>
-                        <Paragraph>
-                            LaneDeparture: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </Paragraph>
-                    </li>
-                    <li>
-                        <Paragraph>
-                            PedestrianAndCyclistCollision: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </Paragraph>
-                    </li>
-                    <li>
-                        <Paragraph>
-                            SuddenBraking: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </Paragraph>
-                    </li>
-                </ul>
+
+
+                <Paragraph>
+                    <Title level={3} style={{ color: 'skyblue' }}>Here's an explanation of each option:</Title>
+                </Paragraph>
+                <h3>
+                    <ul>
+                        <li>
+                            <Paragraph>
+                                SuddenBraking: with sudden braking (Sudden braking).
+                            </Paragraph>
+                        </li>
+                        <li>
+                            <Paragraph>
+                                ExceededSpeedLimit: with exceeding the speed limit (related to speed or lane)
+                            </Paragraph>
+                        </li>
+                        <li>
+                            <Paragraph>
+                                LaneDeparture: with lane departure (related to speed or lane)
+                            </Paragraph>
+                        </li>
+                        <li>
+                            <Paragraph>
+                                ForwardDirections: with forward directions (related to Collisions)
+                            </Paragraph>
+                        </li>
+                        <li>
+                            <Paragraph>
+                                PedestrianAndCyclistCollision: with pedestrian and cyclist collision (related to Collisions)
+                            </Paragraph>
+                        </li>
+                    </ul>
+                </h3>
             </div>
             <Divider />
             <div style={{ display: 'flex', alignItems: 'center' }}>

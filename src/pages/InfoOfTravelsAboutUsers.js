@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {  Avatar, Card, Divider, List,  Progress, message } from 'antd';
 import TravelService from '../services/travel.service';
-import moment from 'moment';
 
-const formatTime = (time) => {
-  return moment(time).format("MM/DD/YYYY HH:mm:ss");
-}
+import {formatTime} from '../common/formtar'
 
 function UserDetailsOfTravels() {
 

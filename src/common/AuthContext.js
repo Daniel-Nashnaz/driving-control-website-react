@@ -51,7 +51,7 @@ const logout = async () => {
   await axios.get(API_BASE_URL + "v1/auth/signout", { withCredentials: true });
   localStorage.removeItem("userProfile");
   setUser(null);
-  navigate("/");
+  navigate("/home");
 };
 
 

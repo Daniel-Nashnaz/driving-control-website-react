@@ -12,7 +12,7 @@ const { Header } = Layout;
 
 
 function Navbar() {
-    const { user, logout } = useContext(AuthContext);
+    const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const handleMenuClick = (e) => {

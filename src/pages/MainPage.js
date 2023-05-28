@@ -15,13 +15,12 @@ function MainPage() {
             cover={<img alt="My Site" src={logo} />}
           >
             <Card.Meta
-              title={<Title level={2}>Welcome to My Site</Title>}
+              title={<Title level={3} style={{textAlign:'center'}}>Welcome to driving control system</Title>}
               description={
                 <Text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  pharetra neque auctor, rutrum velit et, ultricies quam.
-                  Nullam eleifend, nunc a fringilla hendrerit, lacus velit
-                  faucibus elit, vitae ultricies elit quam a enim.
+                  Real time driving control system RTDI (Real time driving information)
+                  <br></br>The system receives real-time data about driving in any means of transportation we have that is installed in the system, the vehicle manager can know exactly how he drove and where there were problems, etc.
+                  <br></br>Register or login now.
                 </Text>
               }
             />

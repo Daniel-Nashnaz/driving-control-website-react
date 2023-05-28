@@ -203,9 +203,7 @@ export default function UserDetails() {
                         maxWidth: 450,
                     }}
                     onFinish={handleEditClick}
-
                 >
-
                     <Form.Item
                         label="UserName"
                         name="userName"

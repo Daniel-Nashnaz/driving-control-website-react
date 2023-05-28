@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Form, Input, InputNumber, Modal, Popconfirm, Result, Table, Typography } from 'antd';
+import { Button, Form, Input, InputNumber, Modal, Popconfirm, Table, Typography } from 'antd';
 import { useState, useEffect } from 'react';
 import VehicleService from '../services/vehicle.services';
+import { Link } from 'react-router-dom';
 
 const EditableCell = ({ editing, dataIndex, title, inputType, record, index, children, ...restProps }) => {
     const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
@@ -214,7 +215,9 @@ const TableOfVehicles = () => {
                             Save
                         </Typography.Link>
                         <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <a>Cancel</a>
+                            <Link>
+                            Cancel
+                            </Link>
                         </Popconfirm>
                     </span>
                 ) : (

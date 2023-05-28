@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children, accessBy }) => {
     }
   }
   return(<>
-  <Navigate to="/"></Navigate>
+  <Navigate to="/home"></Navigate>
  </>);
 };
 export default ProtectedRoute;

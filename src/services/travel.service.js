@@ -25,18 +25,12 @@ const getStatisticsOfTripId = (tripId) => {
     return jwtInterceptor.get(API_BASE_URL + `travel/getStatisticsOfTripId/${tripId}`);
 };
 
-const updateVehicleById = (vehicleId, data) => {
-    return jwtInterceptor.put(API_BASE_URL + `vehicle/updateVehicle/${vehicleId}`, data);
+const getAllDataOfTripId = (tripId) => {
+    return jwtInterceptor.get(API_BASE_URL + `travel/getAllDataAboutTripId/${tripId}`);
 
 };
 
-const deleteVehicleById = (vehicleId) => {
-    return jwtInterceptor.delete(API_BASE_URL + `vehicle/deleteVehicleById/${vehicleId}`);
-};
 
-const addUserToVehicle = (data) => {
-    return jwtInterceptor.post(API_BASE_URL + "vehicle/addDriver", data);
-};
 
 
 
@@ -44,6 +38,7 @@ const TravelService = {
     getAllLastTravelOfUsers,
     getLastTripsByUser,
     getStatisticsOfTripId,
+    getAllDataOfTripId,
 
 }
 

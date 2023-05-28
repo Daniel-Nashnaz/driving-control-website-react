@@ -1,4 +1,3 @@
-import axios from "axios";
 import { API_BASE_URL } from "../common/constants";
 
 import jwtInterceptor from "../common/jwtInterceptor";
@@ -59,10 +58,11 @@ const addAllowSendAlert = (dataOfAlert) => {
   });
 };
 
-
 const updateAllowSendAlert = (data) => {
   return jwtInterceptor.put(API_BASE_URL + `home/updateAllowMessage`, data);
 };
+
+
 
 
 const AdminService = {
