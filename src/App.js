@@ -22,6 +22,8 @@ import UserProfile from './pages/Profile';
 import AllInfromationAboutTrip from './pages/AllInformationAboutTrip';
 import MessageList from './components/ShowAllMessage';
 import Dashboard from './pages/text';
+import TripsDashboard from './pages/TripsDashboard';
+import MyChartComponent from './components/MyChartComponent ';
 
 function App() {
 
@@ -56,11 +58,11 @@ function App() {
                       </ProtectedRoute>
                     }
                   ></Route>
-                  <Route exact path="/travels" element={<Dashboard/>} />
+                  <Route exact path="/travels" element={<TripsDashboard/>} />
                   <Route exact path="/user/:id/:fullName" element={<UserDetailsOfTravels />} />
                   <Route exact path="/tripsummary/:tripId" element={<StatisticsOfTrip />} />
                   <Route exact path="/allInfromation/:tripId" element={<AllInfromationAboutTrip />} />
-                  {/* <Route path="/settings" element={<p>setting</p>} /> */}
+                   <Route path="/infoAboutDriver/:userId" element={<MyChartComponent/>} />
                   {/* <Route path="/travel" element={<div>Add Travel</div>}></Route> */}
                   <Route path="/addDriverToVehicle" element={<AddDriverToVehicle />} />
                   <Route path="/addVeicle" element={<TableOfVehicles />}></Route>

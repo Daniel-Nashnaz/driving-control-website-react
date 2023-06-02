@@ -7,6 +7,7 @@ import {
   ApiOutlined,
   UserOutlined,
   SettingOutlined,
+  DashboardOutlined,
 } from "@ant-design/icons";
 import SubMenu from "antd/es/menu/SubMenu";
 import MessageList from "./ShowAllMessage";
@@ -64,11 +65,11 @@ function Sidebar() {
             <span>Home</span>
           </Menu.Item>
           <Menu.Item key="/travels">
-            <CarOutlined />
-            <span>Travels</span>
+            <DashboardOutlined />
+            <span>Dashboard</span>
           </Menu.Item>
           <SubMenu key="1" title={<span><ApiOutlined /><span>Action</span></span>}>
-            <Menu.Item key="/addVeicle">All Veicles</Menu.Item>
+            <Menu.Item key="/addVeicle"><CarOutlined /><span> All Veicles</span></Menu.Item>
             <Menu.Item key="/addDriverToVehicle">Add Driver To Tehicle</Menu.Item>
           </SubMenu>
           <SubMenu key="2" title={<span><SettingOutlined /><span>Setting</span></span>}>

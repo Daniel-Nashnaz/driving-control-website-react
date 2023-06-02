@@ -287,7 +287,7 @@ const TableOfVehicles = () => {
                 dataSource={data}
                 columns={mergedColumns}
                 rowClassName="editable-row"
-                warnKey="id"
+                rowKey="id"
                 pagination={{
                     onChange: cancel,
                 }}
