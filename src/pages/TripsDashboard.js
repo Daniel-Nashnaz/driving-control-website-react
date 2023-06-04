@@ -142,7 +142,7 @@ const TripsDashboard = () => {
             <Content style={{ padding: '50px' }}>
                 <Row gutter={16}>
                     <Col span={6}>
-                        <Link to={"/travels"}>
+                        <Link to={"/dashboard"}>
                             <DashboardCard
                                 icon={
                                     <ApiOutlined 

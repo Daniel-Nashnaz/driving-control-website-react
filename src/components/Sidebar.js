@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {  Layout, Menu } from "antd";
+import React, { useContext, useState } from "react";
+import { Layout, Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   HomeOutlined,
@@ -8,14 +8,20 @@ import {
   UserOutlined,
   SettingOutlined,
   DashboardOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 import SubMenu from "antd/es/menu/SubMenu";
 import MessageList from "./ShowAllMessage";
+import AuthContext from "../common/AuthContext";
 
 
 const { Sider } = Layout;
 
 function Sidebar() {
+  const { user } = useContext(AuthContext);
+
+  const role = user.roles.includes("ROLE_ADMIN");
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -64,22 +70,24 @@ function Sidebar() {
             <HomeOutlined />
             <span>Home</span>
           </Menu.Item>
-          <Menu.Item key="/travels">
+          <Menu.Item key="/dashboard">
             <DashboardOutlined />
             <span>Dashboard</span>
           </Menu.Item>
-          <SubMenu key="1" title={<span><ApiOutlined /><span>Action</span></span>}>
-            <Menu.Item key="/addVeicle"><CarOutlined /><span> All Veicles</span></Menu.Item>
-            <Menu.Item key="/addDriverToVehicle">Add Driver To Tehicle</Menu.Item>
-          </SubMenu>
-          <SubMenu key="2" title={<span><SettingOutlined /><span>Setting</span></span>}>
-            <Menu.Item key="0" onClick={changeTheme}>Change Style</Menu.Item>
-            <Menu.Item key="/settingAlerts">Setting Alerts</Menu.Item>
-            <Menu.Item key="3" onClick={showDrawer}>Messages send</Menu.Item>
-          </SubMenu>
+          {role && <>
+            <SubMenu key="1" title={<span><ApiOutlined /><span>Action</span></span>}>
+              <Menu.Item key="/addVeicle"><CarOutlined /><span> All Veicles</span></Menu.Item>
+              <Menu.Item key="/addDriverToVehicle">Add Driver To Vehicle</Menu.Item>
+            </SubMenu>
+            <SubMenu key="2" title={<span><SettingOutlined /><span>Setting</span></span>}>
+              <Menu.Item key="0" onClick={changeTheme}><EyeOutlined /><span>Change Style</span></Menu.Item>
+              <Menu.Item key="/settingAlerts">Setting Alerts</Menu.Item>
+              <Menu.Item key="3" onClick={showDrawer}>Messages send</Menu.Item>
+            </SubMenu>
+          </>}
           <Menu.Item key="/profile">
             <UserOutlined />
-            Profile
+            <span>Profile</span>
           </Menu.Item>
         </Menu>
       </Sider>

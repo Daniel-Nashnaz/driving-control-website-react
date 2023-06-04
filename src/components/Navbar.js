@@ -12,7 +12,10 @@ const { Header } = Layout;
 
 
 function Navbar() {
-    const { logout } = useContext(AuthContext);
+    const { logout, user } = useContext(AuthContext);
+
+    const role = user.roles.includes("ROLE_ADMIN");
+
     const navigate = useNavigate();
     const location = useLocation();
     const handleMenuClick = (e) => {
@@ -34,16 +37,18 @@ function Navbar() {
             >
                 <Menu.Item key="/">
                     <BranchesOutlined />
-                    Driving control
+                    <span>Driving control</span>
                 </Menu.Item>
-                <Menu.Item key="/addDriver">
-                    <UsergroupAddOutlined />
-                    Adding Drivers
-                </Menu.Item>
-                <Menu.Item key="/userDetails">
-                    <ContactsOutlined />
-                    All Users
-                </Menu.Item>
+                {role && <>
+                    <Menu.Item key="/addDriver">
+                        <UsergroupAddOutlined />
+                        <span>Adding Drivers</span>
+                    </Menu.Item>
+                    <Menu.Item key="/userDetails">
+                        <ContactsOutlined />
+                       <span> All Users</span>
+                    </Menu.Item>
+                </>}
                 <Menu.Item key="0" style={{ position: "absolute", right: 0 }} onClick={() => logout()}>
                     SignOut
                 </Menu.Item>

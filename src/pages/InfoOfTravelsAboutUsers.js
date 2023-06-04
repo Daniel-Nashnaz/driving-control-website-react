@@ -1,18 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import {  Avatar, Card, Divider, List,  Progress, message } from 'antd';
+import { Avatar, Card, Divider, List, Progress, message } from 'antd';
 import TravelService from '../services/travel.service';
 
-import {formatTime} from '../common/formtar'
+import { formatTime } from '../common/formtar'
+import AuthContext from '../common/AuthContext';
 
 function UserDetailsOfTravels() {
+  const { user } = useContext(AuthContext);
+  const [fullNameUser ,setFullNameUser] = useState();
 
   const navigate = useNavigate();
-  const { id, fullName } = useParams();
+  let { id, fullName } = useParams();
   const [data, setData] = useState([]);
 
 
   useEffect(() => {
+    if (id === undefined && fullName === undefined) {
+      id = user.id;
+      setFullNameUser(user.fullName);
+    }else{
+      
+      setFullNameUser(fullName);
+    }
     fetchData();
   }, []);
 
@@ -21,13 +31,13 @@ function UserDetailsOfTravels() {
       const response = await TravelService.getLastTripsByUser(id);
       console.log('Driving data:', response);
       setData(response.data);
-      if (response.data <= 0)  {
+      if (response.data <= 0) {
         message.error("User not found!");
         //go back page
         setTimeout(() => {
           navigate(-2);
         }, 1000);
-        
+
       }
     } catch (error) {
       message.error(error.message);
@@ -42,7 +52,7 @@ function UserDetailsOfTravels() {
     <p style={{ textAlign: 'center' }}>
       <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
     </p>
-    <h3 style={{ textAlign: 'center', color: 'orangered' }}>  Last Trips of driver: <b style={{ color: 'darkorange' }}>{fullName}</b></h3>
+    <h3 style={{ textAlign: 'center', color: 'orangered' }}>  Last Trips of driver: <b style={{ color: 'darkorange' }}>{fullNameUser}</b></h3>
     <Divider />
     <List
 
@@ -72,12 +82,12 @@ function UserDetailsOfTravels() {
           </i>}
           >
             <h6>
-            <p>Trip Number: {trip.tripId}</p>
-            <p>Travel start: {formatTime(trip.travelStart)}</p>
-            <p>Travel end: {formatTime(trip.travelEnd)}</p>
-            <p>Type of vehicle: {trip.typeOfVehicle}</p>
-            <p>Vehicle name: {trip.vehicleName}</p>
-            <p>Vehicle number: {trip.vehicleNumber}</p>
+              <p>Trip Number: {trip.tripId}</p>
+              <p>Travel start: {formatTime(trip.travelStart)}</p>
+              <p>Travel end: {formatTime(trip.travelEnd)}</p>
+              <p>Type of vehicle: {trip.typeOfVehicle}</p>
+              <p>Vehicle name: {trip.vehicleName}</p>
+              <p>Vehicle number: {trip.vehicleNumber}</p>
             </h6>
             <div style={{ textAlign: 'center' }}>
               <Link to={`/tripsummary/${trip.tripId}`} key="list-loadmore-more">
@@ -90,7 +100,7 @@ function UserDetailsOfTravels() {
         </List.Item>
       )}
     />
-      
+
   </>);
 };
 

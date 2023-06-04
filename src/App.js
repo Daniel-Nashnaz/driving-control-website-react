@@ -21,13 +21,17 @@ import StatisticsOfTrip from './pages/StatisticsOfTrip';
 import UserProfile from './pages/Profile';
 import AllInfromationAboutTrip from './pages/AllInformationAboutTrip';
 import MessageList from './components/ShowAllMessage';
-import Dashboard from './pages/text';
 import TripsDashboard from './pages/TripsDashboard';
 import MyChartComponent from './components/MyChartComponent ';
+import AuthorizationRoute from './common/AuthorizationRoute';
 
 function App() {
 
   const { user } = useContext(AuthContext);
+  let role
+  if (user) {
+    role = user.roles.includes("ROLE_ADMIN");
+  }
   const { token: { colorBgContainer } } = theme.useToken();
   return (
     <>
@@ -50,43 +54,75 @@ function App() {
                 }}
               >
                 <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      <ProtectedRoute accessBy="authenticated">
-                        <LastTravelOfUsers />
-                      </ProtectedRoute>
-                    }
-                  ></Route>
-                  <Route exact path="/travels" element={<TripsDashboard/>} />
+
+                  {role && <>
+                    <Route
+                      path="/"
+                      element={
+                        <AuthorizationRoute accessBy="Admin">
+                          <LastTravelOfUsers />
+                        </AuthorizationRoute>
+                      }
+                    ></Route>
+                    <Route exact path="/dashboard" element={<TripsDashboard />} />
+                  </>}
+                  {!role && <>
+                    <Route exact path="/dashboard" element={<p>add graph of user</p>} />
+                    <Route
+                      path="/"
+                      element={
+                        <AuthorizationRoute accessBy="User">
+                          <UserDetailsOfTravels />
+                        </AuthorizationRoute>
+                      }
+                    ></Route>
+                  </>}
                   <Route exact path="/user/:id/:fullName" element={<UserDetailsOfTravels />} />
                   <Route exact path="/tripsummary/:tripId" element={<StatisticsOfTrip />} />
                   <Route exact path="/allInfromation/:tripId" element={<AllInfromationAboutTrip />} />
-                   <Route path="/infoAboutDriver/:userId" element={<MyChartComponent/>} />
+                  <Route path="/infoAboutDriver/:userId" element={<MyChartComponent />} />
+
                   {/* <Route path="/travel" element={<div>Add Travel</div>}></Route> */}
-                  <Route path="/addDriverToVehicle" element={<AddDriverToVehicle />} />
-                  <Route path="/addVeicle" element={<TableOfVehicles />}></Route>
-                  <Route exact path="/userDetails" element={<UserDetails />} />
+
+                  <Route path="/addDriverToVehicle" element={
+                    <AuthorizationRoute accessBy="Admin">
+                      <AddDriverToVehicle />
+                    </AuthorizationRoute>} />
+
+                  <Route path="/addVeicle" element={
+                    <AuthorizationRoute accessBy="Admin">
+                      <TableOfVehicles />
+                    </AuthorizationRoute>
+                  }></Route>
+
+                  <Route exact path="/userDetails" element={
+                    <AuthorizationRoute accessBy="Admin">
+                      <UserDetails />
+                    </AuthorizationRoute>} />
+
                   <Route
                     exact path="/addDriver"
                     element={
-                      <ProtectedRoute accessBy="authenticated">
+                      <AuthorizationRoute accessBy="Admin">
                         <Register myprops={"User"} />
-                      </ProtectedRoute>
+                      </AuthorizationRoute>
                     }
                   ></Route>
                   <Route
                     exact path="/settingAlerts"
                     element={
-                      <ProtectedRoute accessBy="authenticated">
+                      <AuthorizationRoute accessBy="Admin">
                         <SettigAlerts />
-                      </ProtectedRoute>
+                      </AuthorizationRoute>
                     }
                   ></Route>
 
 
-                  <Route path="/allmessagesSend" element={<MessageList />}></Route> 
-                  {/* <Route path="/addDriverToVehicle" element={<AddDriverToVehicle/>}></Route> */}
+                  <Route path="/allmessagesSend" element={
+                    <AuthorizationRoute accessBy="Admin">
+                      <MessageList />
+                    </AuthorizationRoute>}></Route>
+
                   <Route path="/profile" element={<UserProfile />}></Route>
 
                   <Route path='*' element={<NotFound />} />
