@@ -34,14 +34,17 @@ const commonNames = [
 ];
 
 
-const BarChartOfUser = ({ userId }) => {
+const BarChartOfUser = (props) => {
+    const {onCardChange , userId} =props;
 
     const [level, setLevel] = useState(null);
     const [dataFromDb, setDataFromDb] = useState({});
     useEffect(() => {
         fetchData();
 
-    }, [])
+    }, []);
+
+
 
     const fetchData = async () => {
         StatisticService.getAllStatistic(userId).then(
@@ -49,11 +52,18 @@ const BarChartOfUser = ({ userId }) => {
                 const data = response.data;
                 setLevel(data.level[0].alertLevel)
                 setDataFromDb(data.allStatistic[0])
+                const newCard = {
+                    totalTrips: data.countTrips,
+                    averageTrips: data.allStatistic[0].averageTripScore.toFixed(2),
+                    averageSpeeds:data.allStatistic[0].averageSpeed.toFixed(2),
+                    report:data.report,
+                  };
+                  onCardChange(newCard);
 
                 //add avg speed and trips 
                 //add level of user
                 console.log(response.data);
-
+                
 
             },
             (error) => {
@@ -151,23 +161,29 @@ const BarChartOfUser = ({ userId }) => {
     };
 
     const options = {
-        title: {
+        plugins: {
+          title: {
             display: true,
-            text: 'My Chart Title',
-            fontSize: 20,
+            text: 'Bar chart showing the total number of Warnings.',
+            font: {
+              size: 20
+            },
+            color:'lightskyblue'
+          }
         },
         scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: true,
-                    },
-                },
-            ],
-        },
-    };
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 10
+            }
+          }
+        }
+      };
     return (<>
-        <div style={{ width: 850, height: 450 }}>
+        <div >
             <Bar data={chartData} options={options} />
         </div>
     </>);

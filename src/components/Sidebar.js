@@ -9,6 +9,8 @@ import {
   SettingOutlined,
   DashboardOutlined,
   EyeOutlined,
+  AlertOutlined,
+  MessageOutlined ,
 } from "@ant-design/icons";
 import SubMenu from "antd/es/menu/SubMenu";
 import MessageList from "./ShowAllMessage";
@@ -81,8 +83,8 @@ function Sidebar() {
             </SubMenu>
             <SubMenu key="2" title={<span><SettingOutlined /><span>Setting</span></span>}>
               <Menu.Item key="0" onClick={changeTheme}><EyeOutlined /><span>Change Style</span></Menu.Item>
-              <Menu.Item key="/settingAlerts">Setting Alerts</Menu.Item>
-              <Menu.Item key="3" onClick={showDrawer}>Messages send</Menu.Item>
+              <Menu.Item key="/settingAlerts"><AlertOutlined /><span>Setting Alerts</span></Menu.Item>
+              <Menu.Item key="3" onClick={showDrawer}><MessageOutlined /><span>Messages send</span></Menu.Item>
             </SubMenu>
           </>}
           <Menu.Item key="/profile">

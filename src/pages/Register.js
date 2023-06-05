@@ -52,7 +52,7 @@ const Register = (props) => {
           setMessage(response.status + " Status User add successfully!");
           setSuccessful(true);
           setTimeout(() => {
-            navigate("/home");
+            navigate("/");
           }, 2000);
         },
         (error) => {

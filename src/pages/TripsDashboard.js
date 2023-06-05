@@ -17,6 +17,7 @@ import {
     UserOutlined,
     CarOutlined,
     ApiOutlined ,
+    DatabaseOutlined,
 } from "@ant-design/icons";
 import DashboardCard from '../components/DashboardCard';
 import { Link, useNavigate } from 'react-router-dom';
@@ -60,7 +61,7 @@ const TripsDashboard = () => {
                 setAllDrivers(data.allDrivers);
                 setAllTrip(data.allTrip);
                 setAllVehicle(data.allVehicle);
-                setAvgAll(data.avgAll);
+                setAvgAll(data.avgAll.toFixed(2));
                 setScores(data.scores);
                 //If have setting in system for admin!
                 console.log(response.data);
@@ -91,7 +92,8 @@ const TripsDashboard = () => {
         if (elements.length) {
             const clickedIndex = elements[0].index;
             const clickedUserID = scores[clickedIndex].userID;
-            navigate(`/infoAboutDriver/${clickedUserID}`);
+            const clickedFullNameID = scores[clickedIndex].fullName;
+            navigate(`/infoAboutDriver/${clickedUserID}/${clickedFullNameID}`);
         }
     };
 
@@ -181,7 +183,7 @@ const TripsDashboard = () => {
                         <Link to={"/"}>
                             <DashboardCard
                                 icon={
-                                    <CarOutlined                                         style={{
+                                    <DatabaseOutlined                                       style={{
                                             backgroundColor: "lightgray",
                                             borderRadius: 20,
                                             fontSize: 24,

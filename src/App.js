@@ -22,8 +22,8 @@ import UserProfile from './pages/Profile';
 import AllInfromationAboutTrip from './pages/AllInformationAboutTrip';
 import MessageList from './components/ShowAllMessage';
 import TripsDashboard from './pages/TripsDashboard';
-import MyChartComponent from './components/MyChartComponent ';
 import AuthorizationRoute from './common/AuthorizationRoute';
+import DriverDashboard from './pages/DriverDashboard';
 
 function App() {
 
@@ -66,6 +66,7 @@ function App() {
                     ></Route>
                     <Route exact path="/dashboard" element={<TripsDashboard />} />
                   </>}
+
                   {!role && <>
                     <Route exact path="/dashboard" element={<p>add graph of user</p>} />
                     <Route
@@ -80,7 +81,7 @@ function App() {
                   <Route exact path="/user/:id/:fullName" element={<UserDetailsOfTravels />} />
                   <Route exact path="/tripsummary/:tripId" element={<StatisticsOfTrip />} />
                   <Route exact path="/allInfromation/:tripId" element={<AllInfromationAboutTrip />} />
-                  <Route path="/infoAboutDriver/:userId" element={<MyChartComponent />} />
+                  <Route path="/infoAboutDriver/:userId/:fullName" element={<DriverDashboard />} />
 
                   {/* <Route path="/travel" element={<div>Add Travel</div>}></Route> */}
 

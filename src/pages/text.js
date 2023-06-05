@@ -678,7 +678,7 @@ const Dashboard = () => {
               showIcon
             />
           </Col> */}
-          <div style={{ width: '750px', height: '550px' }}>
+          <div style={{ width: '800px', height: '500px' }}>
 
             <Bar data={dataa} options={options} />
           </div>
