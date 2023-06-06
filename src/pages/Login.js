@@ -30,9 +30,16 @@ const Login = () => {
         setErrorMessage("No response received from the server.");
       } else {
         // something else went wrong
-        setErrorMessage("An error occurred: " + error);
+        setErrorMessage("An error occurred Check if the password and email are correct: " + error);
       }
       setLoading(false);
+    }
+  };
+  const validateNoInjection = (rule, value, callback) => {
+    if (value && /[/*\\-]/.test(value)) {
+      callback(`${rule.fullField} cannot contain: /,  \\, *,  -`);
+    } else {
+      callback();
     }
   };
 
@@ -48,7 +55,9 @@ const Login = () => {
       >
         <Form.Item
           name="username"
-          rules={[{ required: true, message: 'Please input your username!' }, { min: 3, message: 'Username must be at least 3 characters!' }]}
+          rules={[{ required: true, message: 'Please input your username!' }, 
+          { min: 3, message: 'Username must be at least 3 characters!' },
+          {validator: validateNoInjection}]}
         >
           <Input prefix={<UserOutlined />} placeholder="Username" />
         </Form.Item>

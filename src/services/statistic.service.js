@@ -9,10 +9,15 @@ const getAllStatistic = (userId) => {
     return jwtInterceptor.get(API_BASE_URL + `/statistic/allStatisticOfUser/${userId}`);
 };
 
+const getAllScore = (userId) => {
+    return jwtInterceptor.get(API_BASE_URL + `statistic/allScoreOfUser/${userId}`);
+};
+
 
 const StatisticService = {
     getAllScores,
     getAllStatistic,
+    getAllScore,
 }
 
 export default StatisticService;

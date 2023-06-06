@@ -72,6 +72,14 @@ const Register = (props) => {
     
   };
 
+  const validateNoInjection = (rule, value, callback) => {
+    if (value && /[/*\\-]/.test(value)) {
+      callback(`${rule.fullField} cannot contain: /,  \\, *,  -`);
+    } else {
+      callback();
+    }
+  };
+
   return (<>
     <div className="container d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
       <div >
@@ -88,7 +96,9 @@ const Register = (props) => {
                 name="fullname"
                 rules={[{ required: true, message: 'Please input your full name!' },
                 { min: 2, message: 'Fullname must be at least 2 characters!' },
-                { max: 100, message: 'Fullname must be less than 100 characters!' }]}
+                { max: 100, message: 'Fullname must be less than 100 characters!' },
+                {validator: validateNoInjection}
+              ]}
               >
                 <Input prefix={<UserOutlined />} placeholder="Full Name" />
               </Form.Item>
@@ -98,7 +108,9 @@ const Register = (props) => {
                 name="username"
                 rules={[{ required: true, message: 'Please input your username!' },
                 { min: 3, message: 'Username must be at least 3 characters!' },
-                { max: 50, message: 'Username must be less than 50 characters!' }]}
+                { max: 50, message: 'Username must be less than 50 characters!' },
+                {validator: validateNoInjection}
+              ]}
               >
                 <Input prefix={<UserOutlined />} placeholder="Username" />
               </Form.Item>
@@ -108,7 +120,8 @@ const Register = (props) => {
                 name="phone"
                 rules={[{ required: true, message: 'Please input your phone number!' },
                 { min: 5, message: 'Phone must be at least 5 characters!' },
-                { max: 20, message: 'Phone must be less than 20 characters!' }]}
+                { max: 20, message: 'Phone must be less than 20 characters!' },
+                {validator: validateNoInjection}]}
               >
                 <Input prefix={<PhoneOutlined />} placeholder="Phone" />
               </Form.Item>
@@ -120,7 +133,8 @@ const Register = (props) => {
                 rules={[{ required: true, message: 'Please input your email!' },
                 { type: 'email', message: 'Please enter a valid email!' },
                 { min: 6, message: 'Email must be at least 6 characters!' },
-                { max: 50, message: 'Email must be less than 50 characters!' }]}
+                { max: 50, message: 'Email must be less than 50 characters!' },
+                {validator: validateNoInjection}]}
               >
                 <Input prefix={<MailOutlined />} placeholder="Email" />
               </Form.Item>
@@ -161,7 +175,8 @@ const Register = (props) => {
                 name="address"
                 rules={[{ required: true, message: 'Please input your address!' },
                 { min: 2, message: 'Address must be at least 2 characters!' },
-                { max: 100, message: 'Address must be less than 100 characters!' }]}
+                { max: 100, message: 'Address must be less than 100 characters!' },
+                {validator: validateNoInjection}]}
               >
                 <Input prefix={<EnvironmentOutlined />} placeholder="Address" />
               </Form.Item>
@@ -171,7 +186,8 @@ const Register = (props) => {
                 name="apartmentNumber"
                 rules={[{ required: true, message: 'Please input your apartment number!' },
                 { min: 1, message: 'ApartmentNumber must be at least 1 characters!' },
-                { max: 10, message: 'ApartmentNumber must be less than 10 characters!' }]}
+                { max: 10, message: 'ApartmentNumber must be less than 10 characters!' },
+                {validator: validateNoInjection}]}
               >
                 <Input prefix={<ApartmentOutlined />} placeholder="Apartment Number" />
               </Form.Item>
@@ -181,7 +197,8 @@ const Register = (props) => {
                 name="city"
                 rules={[{ required: true, message: 'Please input your city!' },
                 { min: 2, message: 'City must be at least 2 characters!' },
-                { max: 50, message: 'City must be less than 50 characters!' }]}
+                { max: 50, message: 'City must be less than 50 characters!' },
+                {validator: validateNoInjection}]}
               >
                 <Input prefix={<HomeOutlined />} placeholder="City" />
               </Form.Item>
@@ -191,7 +208,8 @@ const Register = (props) => {
                 name="country"
                 rules={[{ required: true, message: 'Please input your country!' },
                 { min: 2, message: 'Country must be at least 2 characters!' },
-                { max: 50, message: 'Country must be less than 50 characters!' }]}
+                { max: 50, message: 'Country must be less than 50 characters!' },
+                {validator: validateNoInjection}]}
               >
                 <Input prefix={<GlobalOutlined />} placeholder="Country" />
               </Form.Item>

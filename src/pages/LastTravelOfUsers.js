@@ -1,7 +1,7 @@
 import { Avatar, List, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {formatTimeWithAM_PM} from '../common/formtar'
+import { formatTimeWithAM_PM } from '../common/formtar'
 import TravelService from '../services/travel.service';
 
 
@@ -22,16 +22,20 @@ const LastTravelOfUsers = () => {
     }, []);
 
     const fetchData = async () => {
-        const response = await TravelService.getAllLastTravelOfUsers();
-        setData(response);
-        setInitLoading(false);
+        try {
+            const response = await TravelService.getAllLastTravelOfUsers();
+            setData(response);
+            setInitLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
         <List
-            header={<div style={{ textAlign:'center' }}>
-                <i><h4 style={{color:'gold'}}>Last Travels </h4></i>
-                </div>}
+            header={<div style={{ textAlign: 'center' }}>
+                <i><h4 style={{ color: 'gold' }}>Last Travels </h4></i>
+            </div>}
             className="demo-loadmore-list"
             style={{ minHeight: '350px' }}
             loading={initLoading}
@@ -39,11 +43,11 @@ const LastTravelOfUsers = () => {
             dataSource={data}
             renderItem={(item) => (
                 <List.Item
-                actions={[
-                    <Link to={`/user/${item.id}/${item.fullName}`} key="list-loadmore-more">
-                        More Details
-                    </Link>
-                ]}
+                    actions={[
+                        <Link to={`/user/${item.id}/${item.fullName}`} key="list-loadmore-more">
+                            More Details
+                        </Link>
+                    ]}
                 >
                     <Skeleton avatar title={"Last Travels"} loading={item.loading} active>
                         <List.Item.Meta

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import AuthContext from './common/AuthContext';
 import ProtectedRoute from './common/ProtectedRoute';
@@ -64,11 +64,14 @@ function App() {
                         </AuthorizationRoute>
                       }
                     ></Route>
-                    <Route exact path="/dashboard" element={<TripsDashboard />} />
+                    <Route path="/dashboard" element={<TripsDashboard />} />
                   </>}
 
                   {!role && <>
-                    <Route exact path="/dashboard" element={<p>add graph of user</p>} />
+                    <Route path="/dashboard" element={
+                      <Navigate to={`/infoAboutDriver/${user.id}/${user.fullName}`} />
+                    } />
+
                     <Route
                       path="/"
                       element={
@@ -78,12 +81,14 @@ function App() {
                       }
                     ></Route>
                   </>}
-                  <Route exact path="/user/:id/:fullName" element={<UserDetailsOfTravels />} />
-                  <Route exact path="/tripsummary/:tripId" element={<StatisticsOfTrip />} />
-                  <Route exact path="/allInfromation/:tripId" element={<AllInfromationAboutTrip />} />
-                  <Route path="/infoAboutDriver/:userId/:fullName" element={<DriverDashboard />} />
 
-                  {/* <Route path="/travel" element={<div>Add Travel</div>}></Route> */}
+                  <Route path="/user/:id/:fullName" element={<UserDetailsOfTravels />} />
+
+                  <Route path="/tripsummary/:tripId" element={<StatisticsOfTrip />} />
+
+                  <Route path="/allInfromation/:tripId" element={<AllInfromationAboutTrip />} />
+
+                  <Route path="/infoAboutDriver/:userId/:fullName" element={<DriverDashboard />} />
 
                   <Route path="/addDriverToVehicle" element={
                     <AuthorizationRoute accessBy="Admin">
@@ -164,17 +169,6 @@ function App() {
     </>
   );
 
-
-  /*  {
-      loggedIn && (
-  
-        {!loggedIn && (
-          <Routes>
-            <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/register" element={<Register myprops={"Admin"} />} />
-          </Routes>
-        )
-    }*/
 
 }
 

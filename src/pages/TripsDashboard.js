@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {  Row, Col,  Layout } from 'antd';
+import { Row, Col, Layout } from 'antd';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -16,7 +16,7 @@ import { Bar } from 'react-chartjs-2';
 import {
     UserOutlined,
     CarOutlined,
-    ApiOutlined ,
+    ApiOutlined,
     DatabaseOutlined,
 } from "@ant-design/icons";
 import DashboardCard from '../components/DashboardCard';
@@ -37,14 +37,7 @@ ChartJS.register(
 );
 
 
-const { Header, Content } = Layout;
-
-
-
-
-
-
-
+const { Content } = Layout;
 const TripsDashboard = () => {
 
     const [scores, setScores] = useState([]);
@@ -57,15 +50,18 @@ const TripsDashboard = () => {
 
         StatisticService.getAllScores().then(
             (response) => {
-                const data = response.data;
-                setAllDrivers(data.allDrivers);
-                setAllTrip(data.allTrip);
-                setAllVehicle(data.allVehicle);
-                setAvgAll(data.avgAll.toFixed(2));
-                setScores(data.scores);
-                //If have setting in system for admin!
-                console.log(response.data);
-
+                try {
+                    const data = response.data;
+                    setAllDrivers(data.allDrivers);
+                    setAllTrip(data.allTrip);
+                    setAllVehicle(data.allVehicle);
+                    setAvgAll(data.avgAll.toFixed(2));
+                    setScores(data.scores);
+                    //If have setting in system for admin!
+                    console.log(response.data);
+                } catch (error) {
+                    console.error(error);
+                }
             },
             (error) => {
                 const content =
@@ -74,7 +70,7 @@ const TripsDashboard = () => {
                         error.response.data.message) ||
                     error.message ||
                     error.toString();
-                        console.log(content);
+                console.log(content);
 
             }
         );
@@ -122,12 +118,12 @@ const TripsDashboard = () => {
         scales: {
             x: {
                 ticks: {
-                  font: {
-                    size: 18 
-                    
-                  }
+                    font: {
+                        size: 18
+
+                    }
                 }
-              },
+            },
             yAxes: [
                 {
                     ticks: {
@@ -137,7 +133,7 @@ const TripsDashboard = () => {
             ]
         },
         onClick: handleChartClick
-        
+
     }
     return (
         <Layout>
@@ -147,7 +143,7 @@ const TripsDashboard = () => {
                         <Link to={"/dashboard"}>
                             <DashboardCard
                                 icon={
-                                    <ApiOutlined 
+                                    <ApiOutlined
                                         style={{
                                             backgroundColor: "lightgray",
                                             borderRadius: 20,
@@ -183,12 +179,12 @@ const TripsDashboard = () => {
                         <Link to={"/"}>
                             <DashboardCard
                                 icon={
-                                    <DatabaseOutlined                                       style={{
-                                            backgroundColor: "lightgray",
-                                            borderRadius: 20,
-                                            fontSize: 24,
-                                            padding: 8,
-                                        }}
+                                    <DatabaseOutlined style={{
+                                        backgroundColor: "lightgray",
+                                        borderRadius: 20,
+                                        fontSize: 24,
+                                        padding: 8,
+                                    }}
                                     />
                                 }
                                 title={"Total Trips"}
@@ -218,8 +214,8 @@ const TripsDashboard = () => {
                 <Row gutter={16} style={{ marginTop: '50px' }}>
                     <Bar data={data} options={options} />
                 </Row>
-                <Footer style={{textAlign:'center'}}>
-                    <i><h2 style={{color:'lightgreen'}}>Click on a column to go to the dashboard for that driver</h2></i>
+                <Footer style={{ textAlign: 'center' }}>
+                    <i><h2 style={{ color: 'lightgreen' }}>Click on a column to go to the dashboard for that driver</h2></i>
                 </Footer>
             </Content>
         </Layout>
