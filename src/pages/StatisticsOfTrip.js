@@ -67,7 +67,7 @@ const StatisticsOfTrip = () => {
 
                             >Summary of trip number: {item.tripId}</Typography.Title>
                             </Text>}
-                        description={<h5>Trip Score: {item.tripScore}</h5>}
+                        description={<h5>Trip Score: {item.averageTripScore}</h5>}
                     />
                     <Divider type="horizontal" />
                     <Space direction="horizontal">

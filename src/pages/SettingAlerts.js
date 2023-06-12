@@ -109,6 +109,7 @@ const SettigAlerts = () => {
                 if (response.data[0]) {
                     setDefaultValues(response.data[0]);
                     setHavaData(true);
+                    console.log(response.data);
                 }
             },
             (error) => {
@@ -162,6 +163,8 @@ const SettigAlerts = () => {
             return;
         }
         const data = createDataObject();
+        console.log(data);
+
         if (havaData) {
             AdminService.updateAllowSendAlert(data).then(res => {
                 message.success(res.data.message);

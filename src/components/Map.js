@@ -7,7 +7,9 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.js';
 const Map = ({ data }) => {
 
   useEffect(() => {
-
+    try {
+      
+  
     if (data.length === 0) {
       return; // Return if data is empty
     }
@@ -72,6 +74,9 @@ const Map = ({ data }) => {
       fillColor: 'black',
       fillOpacity: 1
     }).addTo(map).bindPopup(`End time: ${data[data.length - 1].timeFromStart}`);
+  } catch (error) {
+      console.error(error);
+  }
   }, [data]);
 
   return <div id="map" style={{

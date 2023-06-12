@@ -119,7 +119,7 @@ const AllInfromationAboutTrip = () => {
 
       <Card
         style={{
-          width: 280,
+          width: 240,
           height: 600
         }}
       >
