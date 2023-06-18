@@ -24,6 +24,7 @@ import MessageList from './components/ShowAllMessage';
 import TripsDashboard from './pages/TripsDashboard';
 import AuthorizationRoute from './common/AuthorizationRoute';
 import DriverDashboard from './pages/DriverDashboard';
+import EcologyChartOfAdmin from './pages/EcologyBarChartOfAdmin';
 
 function App() {
 
@@ -83,6 +84,8 @@ function App() {
                   </>}
 
                   <Route path="/user/:id/:fullName" element={<UserDetailsOfTravels />} />
+                  
+                  <Route path="/ecology" element={<EcologyChartOfAdmin />} />
 
                   <Route path="/tripsummary/:tripId" element={<StatisticsOfTrip />} />
 

@@ -11,6 +11,7 @@ import {
   EyeOutlined,
   AlertOutlined,
   MessageOutlined ,
+  HeartOutlined,
 } from "@ant-design/icons";
 import SubMenu from "antd/es/menu/SubMenu";
 import MessageList from "./ShowAllMessage";
@@ -87,6 +88,10 @@ function Sidebar() {
               <Menu.Item key="3" onClick={showDrawer}><MessageOutlined /><span>Messages send</span></Menu.Item>
             </SubMenu>
           </>}
+          <Menu.Item key="/ecology">
+          <HeartOutlined />
+            <span>Ecosystem</span>
+          </Menu.Item>
           <Menu.Item key="/profile">
             <UserOutlined />
             <span>Profile</span>
