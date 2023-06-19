@@ -25,6 +25,7 @@ import TripsDashboard from './pages/TripsDashboard';
 import AuthorizationRoute from './common/AuthorizationRoute';
 import DriverDashboard from './pages/DriverDashboard';
 import EcologyChartOfAdmin from './pages/EcologyBarChartOfAdmin';
+import EcologyOfUser from './pages/EcologyOfUser';
 
 function App() {
 
@@ -65,6 +66,7 @@ function App() {
                         </AuthorizationRoute>
                       }
                     ></Route>
+                    <Route path="/ecology" element={<EcologyChartOfAdmin />} />
                     <Route path="/dashboard" element={<TripsDashboard />} />
                   </>}
 
@@ -73,6 +75,9 @@ function App() {
                       <Navigate to={`/infoAboutDriver/${user.id}/${user.fullName}`} />
                     } />
 
+                    <Route path="/ecology/" element={<Navigate
+                      to={`/ecologyOfUser/${user.id}`} />
+                    } />
                     <Route
                       path="/"
                       element={
@@ -84,8 +89,9 @@ function App() {
                   </>}
 
                   <Route path="/user/:id/:fullName" element={<UserDetailsOfTravels />} />
-                  
-                  <Route path="/ecology" element={<EcologyChartOfAdmin />} />
+
+                  <Route path="/ecologyOfUser/:userId" element={<EcologyOfUser />} />
+
 
                   <Route path="/tripsummary/:tripId" element={<StatisticsOfTrip />} />
 
